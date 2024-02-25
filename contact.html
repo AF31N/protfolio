@@ -175,7 +175,7 @@
             <!-- Left Side Ends -->
             <!-- Contact Form Starts -->
             <div class="col-12 col-lg-8">
-                <form class="contactform" id="submit-form" action="contact.html" method="post">
+                <form class="contactform" id="submit-form" action="https://script.google.com/macros/s/AKfycbypQO_NN3Bp_wUcebJIgtsaC1sNa1j0BtEqfoS1EDzJiM3lWWEXFHbcCGd_d2k4GwvY/exec" method="post">
                     <div class="contactform">
                         <div class="row">
                             <div class="col-12 col-md-4">
@@ -189,15 +189,45 @@
                             </div>
                             <div class="col-12">
                                 <textarea name="message" placeholder="YOUR MESSAGE"></textarea>
-                                <button type="submit" class="btn btn-contact">Send Message</button>
+                                <button type="submit" class="btn btn-contact" value="send">Send Message</button>
                             </div>
                             <div class="col-12 form-message">
-                                <span class="output_message text-center font-weight-600 text-uppercase"></span>
+                                
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.contactform').submit(function(e) {
+            e.preventDefault(); // Prevent the form from submitting normally
+            
+            // Perform AJAX POST request
+            $.ajax({
+                type: 'POST',
+                url: 'https://script.google.com/macros/s/AKfycbypQO_NN3Bp_wUcebJIgtsaC1sNa1j0BtEqfoS1EDzJiM3lWWEXFHbcCGd_d2k4GwvY/exec',
+                data: $(this).serialize(), // Serialize form data
+                success: function(response) {
+                    // Show a pop-up or alert upon successful submission
+                    alert('Form submitted successfully!');
+                    // You can customize this to display a modal or a different pop-up message
+                    // Clear form fields after successful submission
+                    $('.contactform')[0].reset();
+                },
+                error: function(error) {
+                    // Handle errors, if any
+                    console.error('Error:', error);
+                    // You can display an error message here
+                    $('.output_message').text('Error occurred while sending message.');
+                }
+            });
+        });
+    });
+</script>
+
+            
             <!-- Contact Form Ends -->
         </div>
     </div>
@@ -217,25 +247,7 @@
 <script src="js/bootstrap.js"></script>
 <script src="js/custom.js"></script>
 
-<script>
-    $("#submit-form").submit((e)=>{
-        e.preventDefault()
-        $.ajax({
-            url:"https://script.google.com/macros/s/AKfycbyMsz7TROqjTdmTJCdVWeDGaZp-8bRF-9FSD--qTOBoha1dKgrZjN7bbY8EF_m9mjzx/exec",
-            data:$("#submit-form").serialize(),
-            method:"post",
-            success:function (response){
-                alert("Form submitted successfully")
-                window.location.reload()
-                // window.location.href="thankyou.html"
-            },
-            error:function (err){
-                alert("Something Error")
 
-            }
-        })
-    })
-</script>
 
 </body>
 
